@@ -64,6 +64,20 @@ client.on('message', message => {
 
 ///// Join Server Welcome Message & Give Role
 client.on('guildMemberAdd', async member => {
+    if (Date.now() - member.user.createdAt > 1000*60*60*24*30) {
+        const KickEmbed = new Discord.MessageEmbed()
+        .setColor("#f00000")
+        .setTitle("You have been kicked from " + message.guild.name)
+        .setThumbnail(member.user.displayAvatarURL({ format: "png", dynamic: true }))
+        .setDescription("Your discord account must be at least 30 days old.")
+        .setFooter('Mojito Bot')
+        .setTimestamp();
+        try { await member.send(KickEmbed) } 
+        catch(err) { console.error(err) }
+
+        member.kick("Account to new");
+    }
+
     member.roles.add(join_roles);
 
     const cachedInvites = guildInvites.get(member.guild.id);
