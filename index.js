@@ -94,7 +94,7 @@ client.on('guildMemberAdd', async member => {
             .setFooter('Mojito Bot')
             .setTimestamp();
 
-        member.guild.channels.cache.find(i => i.name === 'welcome').send(welcomeEmbed);
+        member.guild.channels.cache.find(i => i.id === '782959681970241578').send(welcomeEmbed);
     }
     catch(err) {
         console.log(err);
